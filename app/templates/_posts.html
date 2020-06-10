@@ -50,9 +50,14 @@
                 </div >
                 {% endif %}
                 {% endif %}
-                {% if post.families %}
+                {% if post.grade %}
                 <div class="labell">
-                    已获取家庭成员：{{post.families}}
+                    客户等级：{{post.grade}}
+                </div >
+                {% endif %}
+                {% if post.gradeintro %}
+                <div class="labell">
+                    客户经济状况：{{post.gradeintro}}
                 </div >
                 {% endif %}
                 {% if post.income %}

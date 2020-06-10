@@ -37,7 +37,7 @@ def index():
     form = PostForm()
     if current_user.can(Permission.WRITE) and form.validate_on_submit():
         post = Post( name = form.name.data, phnumber = form.phnumber.data,old = form.old.data,\
-        jobaddress = form.jobaddress.data,homeaddress = form.homeaddress.data, author=current_user._get_current_object())
+        jobaddress = form.jobaddress.data,source = form.source.data, homeaddress = form.homeaddress.data, author=current_user._get_current_object())
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.index'))
@@ -233,15 +233,16 @@ def edit(id):
         post.career = form.career.data
         post.company = form.company.data
         post.jobaddress = form.jobaddress.data
-        post.families = form.families.data
-        post.connects = form.connects.data
+        post.grade = form.grade.data
+        post.gradeintro = form.gradeintro.data
         post.source = form.source.data
         post.homeaddress =form.homeaddress.data
         post.income = form.income.data
-        post.insurance = form.insurance.data
+        #post.insurancese = form.insurancese.data
         post.bobies = form.bobies.data
         post.liking = form.liking.data
         post.married = form.married.data
+        post.connects = form.connects.data
 
 
         db.session.add(post)
@@ -255,15 +256,16 @@ def edit(id):
     form.career.data = post.career
     form.company.data = post.company
     form.jobaddress.data = post.jobaddress
-    form.families.data = post.families
-    form.connects.data = post.connects
+    form.grade.data = post.grade
+    form.gradeintro.data = post.gradeintro
     form.source.data = post.source
     form.homeaddress.data = post.homeaddress
     form.income.data = post.income
-    form.insurance.data = post.insurance
+    #form.insurancese.data = post.insurancese
     form.bobies.data = post.bobies
     form.liking.data = post.liking
     form.married.data = post.married
+    form.connects.data = post.connects
     return render_template('edit_post.html', form=form)
 
 
@@ -281,7 +283,7 @@ def editcc(id):
         comment.meetcase = form.meetcase.data
         comment.meetdate = form.meetdate.data
         comment.meetadress = form.meetadress.data
-        comment.meettimese = form.meettimese.data
+        #comment.meettimese = form.meettimese.data
         comment.beetway = form.beetway.data
         comment.newsabout = form.newsabout.data
         comment.thisthink=form.thisthink.data
@@ -295,13 +297,13 @@ def editcc(id):
         db.session.add(comment)
         db.session.commit()
         flash('The post has been updated.')
-        return redirect(url_for('.post', id=comment.id))
+        return redirect(url_for('.post', id=comment.post_id))
 
     form.meetway.data = comment.meetway
     form.meetcase.data = comment.meetcase
     form.meetdate.data = comment.meetdate
     form.meetadress.data = comment.meetadress
-    form.meettimese.data = comment.meettimese
+    #form.meettimese.data = comment.meettimese
     form.beetway.data = comment.beetway
     form.newsabout.data = comment.newsabout
     form.thisthink.data = comment.thisthink
@@ -338,7 +340,7 @@ def editii(id):
         insurance.baoer = form.baoer.data
         insurance.banknumber = form.banknumber.data
         insurance.bankname = form.bankname.data
-        insurance.nextgetmoney = form.nextgetmoney.data
+        insurance.bxzeren = form.bxzeren.data
         insurance.tbname =  form.tbname.data
         insurance.bbname =  form.bbname.data
         insurance.syname =  form.syname.data
@@ -346,7 +348,7 @@ def editii(id):
 
         db.session.add(insurance)
         db.session.commit()
-        flash('The post has been updated.')
+        flash('保单信息已经更新！')
         return redirect(url_for('.insurance', id=insurance.post_id))
 
     form.insurname.data = insurance.insurname
@@ -362,7 +364,7 @@ def editii(id):
     form.baoer.data = insurance.baoer
     form.banknumber.data = insurance.banknumber
     form.bankname.data = insurance.bankname
-    form.nextgetmoney.data=insurance.nextgetmoney
+    form.bxzeren.data= insurance.bxzeren
     form.tbname.data = insurance.tbname
     form.bbname.data = insurance.bbname
     form.syname.data = insurance.syname
