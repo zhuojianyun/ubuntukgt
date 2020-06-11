@@ -35,6 +35,7 @@ def server_shutdown():
 @main.route('/', methods=['GET', 'POST'])
 def index():
     form = PostForm()
+    #current_user 指当前登录的用户
     if current_user.can(Permission.WRITE) and form.validate_on_submit():
         post = Post( name = form.name.data, phnumber = form.phnumber.data,old = form.old.data,\
         jobaddress = form.jobaddress.data,source = form.source.data, homeaddress = form.homeaddress.data, author=current_user._get_current_object())
@@ -49,11 +50,17 @@ def index():
         query = current_user.followed_posts
     else:
         query = Post.query
-    pagination = query.order_by(Post.timestamp.desc()).paginate(
+    pagination1 = query.order_by(Post.timestamp.desc()).paginate(
         page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out=False)
-    posts = pagination.items
-    return render_template('index.html', form=form, posts=posts,
+    posts = pagination1.items
+
+    pagination = Comment.query.paginate(
+        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+        error_out=False)
+    comments = pagination.items
+
+    return render_template('index.html', posts= posts,form=form, comments=comments,
                            show_followed=show_followed, pagination=pagination)
 
 @main.route('/user/<username>')

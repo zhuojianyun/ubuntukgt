@@ -8,7 +8,7 @@
         </div>
         <div class="comment-content">
             <div class="comment-date">{{ moment(comment.timestamp).fromNow() }}</div>
-            <div class="comment-author">{{ comment.author.name }}拜访{{ comment.post.name }}.</div>
+            <div class="comment-author">{{ comment.author.name }}.拜访客户进行中... ...</div>
             <div class="comment-body">
 
                 <div class="labell">
@@ -42,26 +42,10 @@
                     {% endif %}
                 </div>
                 <div class="labell">
-                    {% if comment.newabout %}
-                     新获取信息--{{ comment.newabout }}
-                    {% endif %}
-                </div>
-                <div class="labell">
-                    {% if comment.nexttime %}
-                     {{ comment.nexttime }}天内要再次联系！
-                    {% endif %}
-                </div>
-                <div class="labell">
-                    {% if comment.planbook %}
-                     有做了计划书见客户
-                    {% endif %}
-                </div>
-                <div class="labell">
                     {% if comment.todo %}
                      下一步计划--{{ comment.todo }}
                     {% endif %}
                 </div>
-
                 <div class="labell">
                     {% if comment.meetdate %}
                      拜访日期--{{ comment.meetdate }}
@@ -79,11 +63,7 @@
             {% endif %}
 
         </div>
-        <div class="comment-footer">
-                <a href="{{ url_for('.editcc', id=comment.id) }}">
-                    <span class="label label-danger">编辑</span>
-                </a>
-            </div>
+        
     </li>
     {% endfor %}
 </ul>

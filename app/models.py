@@ -3,13 +3,13 @@ import hashlib
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from markdown import markdown
-import bleach
+import bleach,os
 from flask import current_app, request, url_for
 from flask_login import UserMixin, AnonymousUserMixin
 from app.exceptions import ValidationError
 from . import db, login_manager
 
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class Permission:
     FOLLOW = 1
     COMMENT = 2
@@ -206,13 +206,12 @@ class User(UserMixin, db.Model):
         db.session.add(self)
 
     def gravatar_hash(self):
-        return hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()
+        return hashlib.md5(self.email.lower().encode('utf-8')).hexdigest() #调用邮箱，全部小写，转成合规码，转成16进制
 
     def gravatar(self, size=100, default='identicon', rating='g'):
-        url = 'https://secure.gravatar.com/avatar'
-        hash = self.avatar_hash or self.gravatar_hash()
-        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
-            url=url, hash=hash, size=size, default=default, rating=rating)
+        url = os.path.join(BASE_DIR,'app/static/imge/42114.png')
+        
+        return "file:///home/jyn/flasky2/app/static/imge/42114.png"
 
     def follow(self, user):
         if not self.is_following(user):

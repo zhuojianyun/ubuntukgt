@@ -1,9 +1,6 @@
 <ul class="comments">
     {% for insurance in insurancese %}
     <li class="comment">
-        <div class="comment-thumbnail">
-
-        </div>
 
         <div class="insurance-content">
             <div class="insurance-date">{% if insurance.baodanhao %} 保单号:{{ insurance.baodanhao }} {% endif %}</div>
@@ -104,6 +101,7 @@
                     <span class="label label-danger">编辑</span>
                 </a>
             </div>
+        
     </li>
     {% endfor %}
 </ul>
