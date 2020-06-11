@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
-{% block title %}管客天 - {{ user.username }}{% endblock %}
+{% block title %}保险销售管理系统 客户中心--{{ user.name }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
+    <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=80) }}">
     <div class="profile-header">
        
         {% if user.name or user.location %}
