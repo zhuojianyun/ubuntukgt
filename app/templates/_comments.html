@@ -8,11 +8,7 @@
         </div>
         <div class="comment-content">
             <div class="comment-date">{{ moment(comment.timestamp).fromNow() }}</div>
-<<<<<<< HEAD
-            <div class="comment-author">{{ comment.author.name }}拜访{{ comment.post.name }}.</div>
-=======
             <div class="comment-author">{% if comment.meetdate %} {{ comment.meetdate }}{% endif %} {{ comment.author.name}}  跟进 {{ comment.post.name}}</div>
->>>>>>> dev
             <div class="comment-body">
 
                 <div class="labell">
